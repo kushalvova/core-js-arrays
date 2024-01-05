@@ -278,7 +278,7 @@ function createNDimensionalArray(n, size) {
   let result = filler;
   const options = new Array(n - 1);
   options.fill(0);
-  const fillTheArr = function () {
+  const fillTheArr = function fn() {
     result = filler.map(() => filler);
     filler = result;
   };
@@ -353,7 +353,7 @@ function createChunks(arr, chunkSize) {
   const result = [];
   let temp = [];
 
-  const getChunk = function (item) {
+  const getChunk = function fn(item) {
     if (temp.length === chunkSize) {
       result.push(temp);
       temp = [];
@@ -397,7 +397,7 @@ function generateOdds(len) {
  */
 function getElementByIndices(arr, indices) {
   let result = arr;
-  const getElement = function (index) {
+  const getElement = function fn(index) {
     result = result[index];
   };
   indices.map((item) => getElement(item));
@@ -418,7 +418,7 @@ function getElementByIndices(arr, indices) {
  */
 function getFalsyValuesCount(arr) {
   let acc = 0;
-  const check = function (x) {
+  const check = function fn(x) {
     if (!x) acc += 1;
     else acc += 0;
   };
@@ -562,10 +562,7 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  const newArr = function (number) {
-    return new Array(number);
-  };
-  return arr.map((item, index) => newArr(index + 1).fill(item)).flat();
+  return arr.map((item, index) => new Array(index + 1).fill(item)).flat();
 }
 
 /**
